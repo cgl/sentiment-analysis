@@ -38,8 +38,7 @@ public class Exporter {
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        //query.setDatabaseURL("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
-        query.setDatabaseURL("jdbc:sqlite:src/main/resources/movie.db");
+        query.setDatabaseURL("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
         query.setQuery("select * from Sentence");
         Instances data = null;
         try {

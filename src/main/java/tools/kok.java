@@ -1,13 +1,14 @@
+package tools;
+
 import net.zemberek.erisim.Zemberek;
 import net.zemberek.tr.yapi.TurkiyeTurkcesi;
 import net.zemberek.yapi.Kelime;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.IOException;
+import java.sql.*;
 import java.util.List;
-import java.util.Scanner;
+import java.util.TreeMap;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,9 +23,21 @@ public class kok {
     static Connection connection = null;
     static String[] words;
     static Zemberek z = new Zemberek(new TurkiyeTurkcesi());
+    static TreeMap<String, String> wordTree = new TreeMap<String,String>();
 
     public static void main(String [] args) throws Exception{
-        kokbul();
+        try {
+
+            init();
+            kokbul();
+            //duzenle();
+            connection.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public static void oneriler(String dizi[], Zemberek z) {
@@ -32,8 +45,8 @@ public class kok {
         while (b < dizi.length) {
             String[] oneriler = z.oner(dizi[b]);
             System.out.println(">>>" + dizi[b] + " kelimesi icin oneriler:");
-            for (int i = 0; i < oneriler.length; i++) {
-                System.out.println(oneriler[i]);
+            for (String anOneriler : oneriler) {
+                System.out.println(anOneriler);
             }
             b++;
         }
@@ -69,17 +82,9 @@ public class kok {
                 else {
                     onerilen++;
 
-                    System.out.println(">>>" + dizi[d] + " kelimesi icin oneriler:");
-                    System.out.println("Uygulanacak öneriyi seçip numarasnı giriniz:");
-                    System.out.println("0. " + dizi[d]);
                     for (int i = 0; i < oneriler.length; i++) {
                         System.out.println((i+1) + ". " + oneriler[i]);
                     }
-                    int l;
-                    Scanner v = new Scanner(System.in);
-                    l = v.nextInt();
-                    System.out.println(dizi[d]+" "+  oneriler[l-1] + " olarak değiştirilecek");
-
                 }
                 //System.out.println(dizi[d]);
                 //System.out.println(">>> " + dizi[d] + " için çözümleme sonucu bulunamamıştır.");
@@ -109,35 +114,29 @@ public class kok {
             h++;
         }
     }
-    public static void kokbul() throws ClassNotFoundException {
-        Class.forName("org.sqlite.JDBC");
-        try {
-            //connection = DriverManager.getConnection("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/movie.db");
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM Sentence");
-            while (resultSet.next()) {
-                String body = resultSet.getString("body");
-
-                if (body.contains(" ")) {
-                    words = body.split(" ");
-                } else {
-                    words = new String[] {body};
-                }
-                /*
-                for (String word : words){
-                    System.out.println(word);
-                }         */
-                kelimeCozumle(words,z);
-                //kelimeAyristir(words, z  );
-
+    public static void kokbul() throws SQLException {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("SELECT * FROM Sentence");
+        while (resultSet.next()) {
+            String body = resultSet.getString("body").replace("&quot;", "");
+            if (body.contains(" ")) {
+                words = body.split(" +");
+            } else {
+                words = new String[] {body};
             }
-            connection.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+                        /*
+                        for (String word : words){
+                            System.out.println(word);
+                        }         */
+            kelimeCozumle(words,z);
+            //kelimeAyristir(words, z  );
 
+        }
+    }
+
+    public static void init() throws ClassNotFoundException, SQLException , IOException{
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
+        //dictionary = load(onerilerDictFile);
     }
 }
