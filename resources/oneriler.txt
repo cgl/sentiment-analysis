@@ -342,6 +342,7 @@ olusan:oluşan
 olusturabiliyor:oluşturabiliyor
 ordularinin:ordularının
 orum:yorum
+oskara:Oscar'a
 osmanli:Osmanlı
 otesı:ötesi
 otomatige:otomatiğe

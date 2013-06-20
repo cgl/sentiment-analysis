@@ -136,7 +136,7 @@ public class kok {
 
     public static void init() throws ClassNotFoundException, SQLException , IOException{
         Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:resources/db/movie.db");
         //dictionary = load(onerilerDictFile);
     }
 }
