@@ -30,8 +30,8 @@ public class Denetleme {
     static String[] words;
     static Zemberek z = new Zemberek(new TurkiyeTurkcesi());
 
-    public static String onerilerDictFile = "/Users/cagil/IdeaProjects/sentiment-analysis/src/main/resources/oneriler.txt";
-    public static String wordsDictFile = "/Users/cagil/IdeaProjects/sentiment-analysis/src/main/resources/wordnet_words_tur";
+    public static String onerilerDictFile = "resources/oneriler.txt";
+    public static String wordsDictFile = "resources/wordnet_words_tur";
     public static void main(String[] args) throws Exception{
         try {
             init();
@@ -51,7 +51,7 @@ public class Denetleme {
     }
     public static void init() throws ClassNotFoundException, SQLException , IOException{
         Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection("jdbc:sqlite:/Users/cagil/Documents/thesis-mac/scripts/movie.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:resources/db/movie.db");
         dictionary = load(onerilerDictFile);
         process();
     }
