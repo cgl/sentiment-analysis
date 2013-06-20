@@ -12,6 +12,7 @@ Beyazperde:Beyaz perde
 Buldugumsa,:bulduğumsa
 Burda:Burada
 Cevik:Çevik
+Constantin_in:cagil
 Eger:Eğer
 Hisari:hisarı
 Hollywood:Holywood
@@ -28,6 +29,8 @@ Niro_nun:Niro'nun
 Obamanin:Obama'nın
 Sanirim:sanırım
 Sirf:Sırf
+Spartaküs:cagil
+Truva:cagil
 Ulubatli:Ulubatlı
 Ulubatlinin:Ulubatlı'nın
 Yanindaki:Yanındaki
@@ -52,9 +55,7 @@ aldiginda:aldığında
 alinmis:alınmış
 aliyorsun:alıyorsun
 alkisladik:alkışladık
-alkisladik:alkışladık
 alkisliyoruz:alkışlıyoruz
-almamis:almamış
 almamis:almamış
 altini:altını
 amacini:amacını
@@ -136,12 +137,10 @@ defek:tefek
 degersiz:değersiz
 degil:değil
 degildi:değildi
-degildi:değildi
 degildir:değildir
 degilim:değilim
 degıl:değil
 deidim:dedim
-demekki:demek ki
 demekki:demek ki
 demisti:demişti
 detaylari:detayları
@@ -176,7 +175,6 @@ ekilmis:ekilmiş
 emegine:emeğine
 entellektüellerin,:entelektüellerin
 erezlik:çerezlik
-etmis:etmiş
 etmis:etmiş
 etmıs:etmiş
 ettigim:ettiğim
@@ -221,7 +219,6 @@ gitmiş,yerine:gitmiş yerine
 gordum:gördüm
 gorurcok:görür
 gozlerinize:gözlerinize
-gozlerinize:gözlerinize
 guzel:güzel
 gögüs:göğüs
 görebildigi:görebildiği
@@ -237,11 +234,9 @@ halusinasyon:halüsinasyon
 hanig:hangi
 harcadıgım:harcadığım
 harcamayin:harcamayın
-harcamayin:harcamayın
 harcanmis:harcanmış
 hatalari:hataları
 hatali:hatalı
-hataymıs:hataymış
 hataymıs:hataymış
 hatirlasaymisim:hatırlasaymışım
 hatrına:hatırına
@@ -272,7 +267,6 @@ inanin:inanın
 inanmayip:inanmayıp
 insa:inşa
 insanlardir:insanlardır
-isiklar:ışıklar
 isiklar:ışıklar
 istedigi:istediği
 izledigim:izlediğim
@@ -342,7 +336,6 @@ oldugunu:olduğunu
 olmadi:olmadı
 olmali:olmalı
 olmasi:olması
-olmus:olmuş
 olmus:1
 olsaydi:olsaydı
 olusan:oluşan
@@ -368,7 +361,6 @@ salina:salına
 sanatina:sanatına
 sancagi:sancağı
 sanirim:sanırım
-sasmayacan:şaşmayacaksın
 sasmayacan:şaşmayacaksın
 savas:savaş
 savasin:savaşın
@@ -408,7 +400,6 @@ tasarlamis:tasarlamış
 tatmın:tatmin
 temasi,:teması
 tesbit:tespit
-tesbit:tespit
 tesvik:teşvik
 toplari:topları
 toplarin:topların
@@ -446,9 +437,11 @@ yapis:yapmış
 yapistir:yapıştır
 yapmayıda:yapmayı da
 yapmilarmis:yapmışlarmış
+yapti:yaptı
 yapti?:yaptı
 yaptigi:yaptığı
 yaptim:yaptım
+yaptirdigindan:yaptırdığından
 yaptirdigindan,:yaptırdığından
 yaptirirlardi:yaptırırlardı
 yaptirmadi:yaptırmadı
@@ -489,9 +482,9 @@ zlemeyin:izlemeyin
 çikip,:çıkıp
 çikiyor:çıkıyor
 çiplak:çıplak
-çiplak:çıplak
 çocugu:çocuğu
 çokki:çok ki
+ögrettikleri:öğrettikleri
 öldügünüz:öldüğünüz
 örnegi:örneği
 İstanbul_u:İstanbul'u
