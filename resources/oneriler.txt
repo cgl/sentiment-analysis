@@ -336,7 +336,6 @@ oldugunu:olduğunu
 olmadi:olmadı
 olmali:olmalı
 olmasi:olması
-olmus:1
 olsaydi:olsaydı
 olusan:oluşan
 olusturabiliyor:oluşturabiliyor
