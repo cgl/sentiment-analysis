@@ -31,16 +31,13 @@ public class Denetleme {
     static Zemberek z = new Zemberek(new TurkiyeTurkcesi());
 
     public static String onerilerDictFile = "resources/oneriler.txt";
-    public static String wordsDictFile = "resources/wordnet_words_tur";
     public static void main(String[] args) throws Exception{
         try {
             init();
-            process();
             duzenle();
 
-
             //listele();
-            save(wordlist,wordsDictFile);
+            //save(wordlist,Lexicons.wordsDictFileOrig);
             connection.close();
         }
         catch (Exception e)
@@ -110,8 +107,6 @@ public class Denetleme {
                 }
                 else{
                     System.out.println("Houston "+dizi[d]);
-                    d++;
-                    continue;
                 }
             }
             else{
@@ -153,52 +148,57 @@ public class Denetleme {
         dlist = new ArrayList<String[]>();
         while (d < dizi.length) {
             if (!z.kelimeDenetle(dizi[d]) & !StringUtils.isNumeric(dizi[d]))  {
+                // oov kelime ise
                 String kelime = StringUtils.strip(dizi[d],"[!?(),-_:.]") ;
                 //String kelime = dizi[d].replaceAll("[!?(),-_:.]+", " ").replaceAll("&quot;", " ");
-                if (!kelime.equals(dizi[d]))
-                    System.out.println("*** "+dizi[d]+" "+kelime+" olarak değişti.");
+
                 if (z.kelimeDenetle(kelime) | StringUtils.isNumeric(kelime) | kelime.isEmpty()) {
-                    d++;
-                    continue;
+                    // strip ile temizlenebiliyorsa yoksay
+                    System.out.println("*** "+dizi[d]+" "+kelime+" olarak değişti.");
+                    // strip edildi.
                 }
-                if(dictionary.containsKey(kelime)){
+                else if(dictionary.containsKey(kelime)){
                     System.out.println(">>>" + kelime + " kelimesini sözlükte bulduk");
                     dlist.add(new String[]{kelime , dictionary.get(kelime)} );
                 }
                 else{
-                    String [] oneriler = z.oner(kelime);
-                    System.out.println("");
-                    System.out.println(">>> " + kelime + " kelimesi icin oneriler:");
-                    System.out.println("Uygulanacak öneriyi seçip numarasnı giriniz:");
-                    System.out.println("0. " + kelime);
-                    for (int i = 0; i < oneriler.length; i++) {
-                        System.out.println((i+1) + ". " + oneriler[i]);
-                    }
-                    int l;
-                    Scanner v = new Scanner(System.in);
-                    l = v.nextInt();
-
-                    if(l == 99)
-                        save(dictionary,onerilerDictFile);
-                    else if (l==0) {
-                        System.out.println(Arrays.toString(dizi));
-                        String o;
-                        Scanner k = new Scanner(System.in);
-                        o = k.next();
-                        //System.out.println(kelime+" "+  o + " olarak değiştirilecek");
-                        dlist.add(new String[]{kelime,o});
-                        dictionary.put(kelime,o);
-                    }
-                    else{
-                        System.out.println(kelime+" "+  oneriler[l-1] + " olarak değiştirilecek");
-                        dlist.add(new String[]{kelime,oneriler[l-1]});
-                        dictionary.put(kelime,oneriler[l-1]);
-                    }
+                    askUserForCorrection(kelime,dlist);
                 }
             }
             d++;
         }
         return dlist;
+    }
+
+    private static void askUserForCorrection(String kelime, List<String[]> dlist) throws IOException {
+        String [] oneriler = z.oner(kelime);
+        System.out.println("");
+        System.out.println(">>> " + kelime + " kelimesi icin oneriler:");
+        System.out.println("Uygulanacak öneriyi seçip numarasını giriniz:");
+        System.out.println("(Kendiniz bir girdi girmek için 0, çıkmak için 99 seçebilirsiniz)");
+        System.out.println("0. " + kelime);
+        for (int i = 0; i < oneriler.length; i++) {
+            System.out.println((i+1) + ". " + oneriler[i]);
+        }
+        int l;
+        Scanner v = new Scanner(System.in);
+        l = v.nextInt();
+
+        if(l == 99) // Abort öncesi lexicon'u save et
+            save(dictionary,onerilerDictFile);
+        else if (l==0) { // Kullanıcının girdiği düzeltmeyi lexicon'a yaz
+            String o;
+            Scanner k = new Scanner(System.in);
+            o = k.next();
+            //System.out.println(kelime+" "+  o + " olarak değiştirilecek");
+            dlist.add(new String[]{kelime,o});
+            dictionary.put(kelime,o);
+        }
+        else{ // Seçilen düzeltmeyi lexicon'a  yaz
+            System.out.println(kelime+" "+  oneriler[l-1] + " olarak değiştirilecek");
+            dlist.add(new String[]{kelime,oneriler[l-1]});
+            dictionary.put(kelime,oneriler[l-1]);
+        }
     }
 
     private static void save(TreeMap<String,String> dictionary, String wordlist) throws IOException {
